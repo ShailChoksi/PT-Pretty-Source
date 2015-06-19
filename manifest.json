@@ -12,7 +12,7 @@
   },
   "permissions": [
     "storage",
-    "activeTab",
+    "tabs",
     "https://ajax.googleapis.com/",
     "https://kickstarter.getpebble.com/pledges/*"
   ]

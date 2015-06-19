@@ -47,9 +47,11 @@ var parsePageHtml = function(result){
         var timeTrackingNumber = pledgeData.order.time_tracking_number;
         var steelTrackingNumber = pledgeData.order.steel_tracking_number;
 
-        //timeTrackingNumber = "q0498t"; //debugging
+        timeTrackingNumber = "q0498t"; //debugging
 
         if(timeTrackingNumber != null || steelTrackingNumber != null) {
+            pledgeData.order.time_tracking_number = "2143";
+            pledgeData.order.time_tracking_url = "localhost";
             ItIsTime(pledgeData.pledge.name, pledgeData.order);
         }
         else {
@@ -65,8 +67,11 @@ var ItIsTime = function(name, data){
     var ptEl = document.getElementById("PT");
     var nameEl = document.createElement("div");
     var nameText = document.createTextNode("Hi " + name + "!");
-    var p = document.createElement("p");
-    var a = document.createElement("a");
+    var p1 = document.createElement("p");
+    var a1 = document.createElement("a");
+
+    var p2 = document.createElement("p");
+    var a2 = document.createElement("a");
     nameEl.appendChild(nameText);
 
     ptEl.appendChild(nameEl);
@@ -83,10 +88,11 @@ var ItIsTime = function(name, data){
         var text = document.createTextNode("Your Pebble Time has shipped! Your tracking number is " + ttNumber + ". Click the url below to go to the tracking page:");
         info.appendChild(text);
         ptEl.appendChild(info);
-        a.setAttribute("href", ttUrl);
-        a.innerHTML = "Its Time!";
-        ptEl.appendChild(p);
-        ptEl.appendChild(a);
+        a1.setAttribute("href", ttUrl);
+        a1.onclick = chrome.tabs.create({url: ttUrl});
+        a1.innerHTML = "Its Time!";
+        ptEl.appendChild(p1);
+        ptEl.appendChild(a1);
     }
 
     if(stNumber != null)
@@ -95,10 +101,11 @@ var ItIsTime = function(name, data){
         info.createTextNode("Your Pebble Time Steel has shipped!");
         ptEl.appendChild(info);
         p.createTextNode("Your tracking number is " + stNumber + ". Click the url below to go to the tracking page:");
-        a.setAttribute("href", ttUrl);
-        a.innerHTML = "Its Time!";
-        ptEl.appendChild(p);
-        ptEl.appendChild(a);
+        a2.setAttribute("href", stUrl);
+        a2.onclick = chrome.tabs.create({url: stUrl});
+        a2.innerHTML = "Its Coming!";
+        ptEl.appendChild(p2);
+        ptEl.appendChild(a2);
     }
 
     document.body.appendChild(ptEl);
