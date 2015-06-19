@@ -31,7 +31,7 @@ var parsePageHtml = function(result){
     {
         chrome.storage.sync.get("pebbleUrl", function(item){
             if(chrome.runtime.error) TeamNull(chrome.runtime.error);
-            if(!item){
+            if(!item.pebbleUrl){
                 chrome.storage.sync.set({'pebbleUrl': inputUrl});
             }
         });
@@ -107,7 +107,7 @@ var ItIsTime = function(name, data){
 
 var TeamNull = function(err){
 
-    var input = document.getElementById("PebbleTimeInput");
+    var input = document.getElementById("PT");
     var p = document.createElement("p");
 
     if(err){
