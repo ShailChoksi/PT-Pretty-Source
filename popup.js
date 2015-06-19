@@ -47,11 +47,11 @@ var parsePageHtml = function(result){
         var timeTrackingNumber = pledgeData.order.time_tracking_number;
         var steelTrackingNumber = pledgeData.order.steel_tracking_number;
 
-        timeTrackingNumber = "q0498t"; //debugging
+        //timeTrackingNumber = "q0498t"; //debugging
 
         if(timeTrackingNumber != null || steelTrackingNumber != null) {
-            pledgeData.order.time_tracking_number = "2143";
-            pledgeData.order.time_tracking_url = "localhost";
+            //pledgeData.order.time_tracking_number = "2143";
+            //pledgeData.order.time_tracking_url = "http://localhost";
             ItIsTime(pledgeData.pledge.name, pledgeData.order);
         }
         else {
@@ -147,6 +147,5 @@ function clearUrl() {
     chrome.storage.sync.remove("pebbleUrl", function(err){
         if(chrome.runtime.error) console.log("Error clearing pebble url!", chrome.runtime.error);
         if(err) console.log(err);
-        console.log("hellow!");
     });
 }
