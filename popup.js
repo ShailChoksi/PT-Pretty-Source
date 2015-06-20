@@ -55,10 +55,10 @@ var parsePageHtml = function(result){
             ItIsTime(pledgeData.pledge.name, pledgeData.order);
         }
         else {
-            TeamNull(null);
+            TeamNull(null, message);
         }
     }else {
-        TeamNull(result.status);
+        TeamNull(result.status, null);
     }
 };
 
@@ -85,11 +85,11 @@ var ItIsTime = function(name, data){
     if(ttNumber != null)
     {
         var info = document.createElement("p");
-        var text = document.createTextNode("Your Pebble Time has shipped! Your tracking number is " + ttNumber + ". Click the url below to go to the tracking page:");
+        var text = document.createTextNode("Your Pebble Time has shipped!");
         info.appendChild(text);
         ptEl.appendChild(info);
         a1.setAttribute("href", ttUrl);
-        a1.onclick = chrome.tabs.create({url: ttUrl});
+        a1.onclick = function() {chrome.tabs.create({url: ttUrl})};
         a1.innerHTML = "Its Time!";
         ptEl.appendChild(p1);
         ptEl.appendChild(a1);
@@ -98,14 +98,21 @@ var ItIsTime = function(name, data){
     if(stNumber != null)
     {
         var info = document.createElement("p");
-        info.createTextNode("Your Pebble Time Steel has shipped!");
+        var text = document.createTextNode("Your Pebble Time Steel has shipped!");
+        info.appendChild(text);
         ptEl.appendChild(info);
-        p.createTextNode("Your tracking number is " + stNumber + ". Click the url below to go to the tracking page:");
         a2.setAttribute("href", stUrl);
-        a2.onclick = chrome.tabs.create({url: stUrl});
+        a2.onclick = function() {chrome.tabs.create({url: stUrl})};
         a2.innerHTML = "Its Coming!";
         ptEl.appendChild(p2);
         ptEl.appendChild(a2);
+
+    } else {
+        var info = document.createElement("p");
+        var text = document.createTextNode("Pebble Time Steel: ");
+        info.appendChild(text);
+        ptEl.appendChild(info);
+        TeamNull(null);
     }
 
     document.body.appendChild(ptEl);
